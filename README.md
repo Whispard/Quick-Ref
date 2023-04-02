@@ -16,3 +16,8 @@ Star button is to summarise (same pdfs)
 7. run `python -m http.server` in that directory (any directory will work if you change `LIB_PATH`)
 8. Enjoy!
 
+## Screenshots
+![Sample](screenshots/sample.png)
+![Hack1](screenshots/hack1.png)
+![Hack2](screenshots/hack2.png)
+![Hack3](screenshots/hack3.png)
