@@ -20,8 +20,8 @@ USE_OPENAI_EMBEDDINGS = False
 
 
 COLLECTION_NAME = "all_collection"
-LIB_PATH = 'content2'
-DB_PATH = ".chromadb2"
+LIB_PATH = 'content'
+DB_PATH = ".chromadb"
 
 
 

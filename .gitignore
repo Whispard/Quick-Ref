@@ -1,0 +1,10 @@
+/venv/
+/.chroma/
+/.chromadb/
+/.chromadb2/
+/.chromadb3/
+/.chromadb_llama/
+/.chromadb_clean/
+/.chromadb_openai_final/
+/.chromadb_test/
+/content2/
