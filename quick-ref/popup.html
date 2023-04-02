@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popup</title>
+
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!--    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"-->
+
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+
+</head>
+<body>
+<!--        <div class="card">-->
+<!--            <div class="card-header">-->
+<!--                <a href="#">Go somewhere</a>-->
+<!--            </div>-->
+<!--            <div class="card-body" style="padding: 0;padding-left: 15px">-->
+<!--                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+    <div id="header">
+
+        <form id="search-form" autocomplete="off">
+            <button id="search-button" type="submit" title="Search"></button>
+            <!--     <div id="auto-result"></div>-->
+            <input id="search-box" autofocus><a id="account" title="Switch account"
+                                                href="https://accounts.google.com/SignOutOptions?continue=https%3A%2F%2Fscholar.google.com%2F%3Foi%3Dgsb00%26lookup%3D0%26hl%3Den&amp;hl=en"
+        >
+            <img id="account-img"
+                 src="https://media.istockphoto.com/id/902418074/vector/books-encyclopedia-multicolored-books-located-around-the-globe-a-global-education-program.jpg?s=612x612&w=0&k=20&c=9lVMx3xBucwughSCYCpS3oDyFf62DPnfcydxjj4kvHw="></a>
+
+        </form>
+    </div>
+    <div class="middle">
+        <div id="main">
+            <!--        <img src="scholar_logo_230x36px.svg"/>-->
+        </div>
+        <div id="auto-result"></div>
+        <div id="message" class></div>
+
+
+    </div>
+    <div id="footer">
+        <div id="library-message" class=""></div>
+        <div id="progress">
+            <div id="progress-inc"></div>
+            <div id="progress-dec"></div>
+        </div>
+        <div id="footer-buttons">
+            <a id="back" href="#" role="button" class="" title="Go back"></a>
+            <a id="forward" href="#"
+               role="button"
+               class="disabled"
+               title="Go forward" ></a>
+            <a
+                    id="full-screen" href="https://google.com/search?q="
+                    title="Open results in a new tab" target="_blank"></a>
+            <a id="library"
+               title="Summarise" target="_blank"></a>
+            <a id="settings"
+                                                         href="/scholar_settings?oi=gsb&amp;hl=en"
+                                                         title="Settings"></a></div>
+        <div class="progress" id="my-progress-bar" style="display: none">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+    </div>
+
+<div id="output"></div>
+</body>
+</html>

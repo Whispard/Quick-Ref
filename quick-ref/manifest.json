@@ -1,0 +1,32 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+  "name": "Quick Ref",
+  "description": "Get Quick references from your local files",
+  "icons": {
+    "16": "scholar16.png",
+    "48": "scholar48.png",
+    "128": "scholar128.png"
+  },
+  "version": "3.2",
+  "minimum_chrome_version": "95.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://scholar.google.com/",
+	"*://google.com/",
+    "https://*/*",
+    "*://search.brave.com/"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "scholar16-tb.png",
+      "32": "scholar32-tb.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

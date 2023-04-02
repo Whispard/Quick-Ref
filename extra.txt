@@ -1,0 +1,1 @@
+The cryptanalyst looking only at the ciphertext would detect the repeated sequences of common digrams and trigrams, devise common factors in the displacements of the various sequences, and make good guess of the keyword length
