@@ -16,6 +16,13 @@ Star button is to summarise (same pdfs)
 7. run `python -m http.server` in that directory (any directory will work if you change `LIB_PATH`)
 8. Enjoy!
 
+## Made With
+- Chroma
+- OpenAI (embeddings & Chat Completion)
+- FastAPI
+- PyPDF2
+- Bootstrap
+
 ## Screenshots
 ![Sample](screenshots/sample.png)
 ![Hack1](screenshots/hack1.png)
