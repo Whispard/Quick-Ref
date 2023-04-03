@@ -22,6 +22,9 @@
     "https://*/*",
     "*://search.brave.com/"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_icon": {
       "16": "scholar16-tb.png",

@@ -16,20 +16,26 @@ let cb = async (e, error) => {
             searchList.appendChild(e)
         }
 
+        const makeUrlFromPDFPage = (url,index) => {
+            if (url.includes("#page="))
+                return url
+            return `http://localhost:7860/open-reader/${index}`
+        }
+
         titleAndUrls.forEach(cur => {
             bracketLinks = '('
             if (cur.pageNo.length >= 1) {
                 console.log("hi")
-                for (const page of cur.pageNo) {
-                    bracketLinks += `<a target="_blank" href="http://localhost:8000/${cur.pdf}#page=${page}"
->${page}</a>, `
+                for (let i=0;i<cur.pageNo.length;i++) {
+                    bracketLinks += `<a  href="${makeUrlFromPDFPage(cur.url,i)}"
+>${cur.pageNo[i]}</a>, `
                 }
                 bracketLinks = bracketLinks.slice(0, -2)
                 bracketLinks+=')'
             }
             inject = `<div class="card result">
             <div class="card-header result-title">
-                <a target="_blank" href="http://localhost:8000/${cur.pdf}#page=${cur.pageNo[0]}">
+                <a href="${makeUrlFromPDFPage(cur.url,0)}">
                     ${cur.pdf.split('.pdf')[0]}</a>
                 ${bracketLinks}
                
@@ -43,35 +49,6 @@ let cb = async (e, error) => {
             ne.innerHTML = inject
             searchList.appendChild(ne)
         })
-
-        // this output is like
-        // <div className="result">
-        //     <div className="result-title">
-        //      <a target="_blank" href="http://localhost:8000/Introduction%20to%20Public%20key%20cryptosystem.pdf#page=15">page
-        //         - 15 : Introduction to Public key cryptosystem.pdf</a>
-        //         </div>
-        //     <p style="border: 1px solid black;">
-        //     Public -Key Cryptosystem: <br>Confidentiality
-        //     <br> <br></p>
-        // </div>
-
-        // titleAndUrls.forEach(cur => {
-        //     let ne = document.createElement('div')
-        //     ne.className = 'result'
-        //     let ne2 = document.createElement('div')
-        //     ne2.className = 'result-title'
-        //     let lnk = document.createElement('a')
-        //     lnk.target = '_blank'
-        //     lnk.href = "http://localhost:8000/"+ cur.url.split('/')[cur.url.split('/').length - 1]
-        //     lnk.innerText = cur.title
-        //     ne2.appendChild(lnk)
-        //     ne.appendChild(ne2)
-        //     let content = document.createElement('p')
-        //     content.innerText = cur.content;
-        //     content.style.border = "1px solid black";
-        //     ne.appendChild(content)
-        //     searchList.appendChild(ne)
-        // })
     }
 
 
@@ -170,3 +147,40 @@ document.querySelector('#library')
 
 
     })
+
+
+
+
+window.addEventListener('click', evt => {
+
+    // ユーザーの操作によるイベントならisTrusted == true
+    // If event is fired by user's operation then isTrusted == true.
+    // Chrome 46.0～
+    // https://developer.mozilla.org/ja/docs/Web/API/Event/isTrusted
+    if (!evt.isTrusted) return;
+    let target = evt.target;
+    while (target && target.tagName.toLowerCase() !== 'a' && target.tagName.toLowerCase() !== 'area') {
+        target = target.parentElement;
+    }
+    if (target) {
+        // check for baseVal of svg a tag's href-SVGAnimatedString
+        const url = target instanceof SVGAElement ? target.href.baseVal : target.href;
+        if (url.startsWith('file://')) {
+            evt.preventDefault();
+            // 拡張が再読み込みされた場合エラーになるので捕捉
+            // Catch the error for the extension is reloaded.
+            console.log("file found")
+            try {
+                //chrome.runtime.getBackgroundPage().backgroundFunction();
+                chrome.runtime.sendMessage({
+                    method: 'openLocalFile',
+                    localFileUrl: url,
+                });
+            } catch (e) {
+                console.log(e)
+            }
+        }
+    }
+}, {
+    capture: true,
+});

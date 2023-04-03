@@ -10,12 +10,18 @@ Star button is to summarise (same pdfs)
 1. Clone the repo
 2. Go to `chrome://extensions` and enable developer mode
 3. Click on Load unpacked and select the `quick-ref` folder to load the extension
-4. set openAI key in `api_key.py`
+4. set openAI key in `api_key.py` 
 5. install dependencies `pip install -r requirements` (use venv in case of conflicts)
 6. run `python main.py`
-7. put PDF files you want to use on, inside content folder
-8. run `python -m http.server` in that directory (any directory will work if you change `LIB_PATH`)
+7. Add Path of Adobe Reader or SumatraPDF in `integrations.py` if you want to use them
+8. Add your pdfs in content folder, (or change `LIB_PATH` for different location)
 9. Enjoy!
+
+## Features
+- Search terms, sentences from local pdfs
+- Summarise the results
+- Open PDFs in browser or Adobe Reader or SumatraPDF
+- Opens pdf with given page no and highlighted text
 
 ## Made With
 - Chroma
