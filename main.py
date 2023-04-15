@@ -17,8 +17,8 @@ SUMMARISE_WITH_GPT = True
 USE_OPENAI_EMBEDDINGS = False
 
 COLLECTION_NAME = "all_collection"
-LIB_PATH = 'content2'  # => 'content'
-DB_PATH = ".chromadb2"  # => 'chromadb'
+LIB_PATH = 'content'  # => 'content'
+DB_PATH = ".chromadb"  # => 'chromadb'
 
 if API_KEY == "":
     SUMMARISE_WITH_GPT = False
