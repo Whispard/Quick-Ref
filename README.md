@@ -7,7 +7,7 @@ It also provides a way to open the pdfs in browser or Adobe Reader or SumatraPDF
 It also opens pdf with given page no. and highlighted text.
 
 So, this helps you to quickly find stuff from your local books/notes when you see similar info on web.
-
+(I'm looking for contributors, please hmu if you want to contribute.)
 
 ## Setup
 1. Clone the repo

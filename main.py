@@ -22,7 +22,7 @@ DB_PATH = ".chromadb"  # => 'chromadb'
 
 if API_KEY == "":
     SUMMARISE_WITH_GPT = False
-    print("Disabling summarisation & openAI embeddings since OpenAI key not found.(You can Add it in api_key.py")
+    print("Disabling summarisation & openAI embeddings since OpenAI key not found. (You can Add it in api_key.py)")
     USE_OPENAI_EMBEDDINGS = False
 
 if READER_TO_USE is not None:
