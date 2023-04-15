@@ -9,7 +9,7 @@ import pathlib
 from fastapi import FastAPI
 import openai
 from api_key import API_KEY
-from integrations import open_reader
+from integrations import open_reader, READER_TO_USE, ENABLE_HIGHLIGHT
 from fastapi.middleware.cors import CORSMiddleware
 
 openai.api_key = API_KEY
@@ -17,15 +17,16 @@ SUMMARISE_WITH_GPT = True
 USE_OPENAI_EMBEDDINGS = False
 
 COLLECTION_NAME = "all_collection"
-LIB_PATH = 'content'  # => 'content'
-DB_PATH = ".chromadb"  # => 'chromadb'
-READER_TO_USE = None
-ENABLE_HIGHLIGHT = True
+LIB_PATH = 'content2'  # => 'content'
+DB_PATH = ".chromadb2"  # => 'chromadb'
 
 if API_KEY == "":
     SUMMARISE_WITH_GPT = False
-    print("Disabling summarisation & openAI embeddings since OpenAI key not found.")
+    print("Disabling summarisation & openAI embeddings since OpenAI key not found.(You can Add it in api_key.py")
     USE_OPENAI_EMBEDDINGS = False
+
+if READER_TO_USE is not None:
+    print(f"Using PDF Reader {READER_TO_USE}")
 
 if USE_OPENAI_EMBEDDINGS:
     embedding_ef = embedding_functions.OpenAIEmbeddingFunction(
@@ -101,6 +102,8 @@ def chatSummarise(content, prompt):
 
 current_outputs = []
 current_prompt = ""
+
+
 def get_results(prompt: Prompt):
     results = collection.query(
         query_texts=[prompt.data],
@@ -108,7 +111,6 @@ def get_results(prompt: Prompt):
     )
     print(
         f"DEBUG: {prompt.data} => Page {results['metadatas'][0][0]['page']}, {results['metadatas'][0][0]['pdf']} : {results['documents'][0][0]}")
-    #open_reader(READER_TO_USE, os.path.join(LIB_PATH,results['metadatas'][0][0]['pdf']), results['metadatas'][0][0]['page'])
 
     outputs = []
     sum_outputs = []
@@ -143,7 +145,7 @@ def get_results(prompt: Prompt):
         if len(out["pageNo"]) > 1:
             out["content"] = chatSummarise(out["content"], prompt.data)
 
-    global current_outputs,current_prompt
+    global current_outputs, current_prompt
     current_outputs = outputs
     current_prompt = prompt.data
     if not prompt.summarised:
@@ -154,6 +156,7 @@ def get_results(prompt: Prompt):
 @app.post("/")
 async def root(prompt: Prompt):
     return get_results(prompt)
+
 
 @app.get('/open-reader/{index}')
 async def run_reader(index):
@@ -166,7 +169,6 @@ async def run_reader(index):
         current_outputs[int(index)]["pageNo"][0],
         highlight
     )
-
 
 
 if __name__ == "__main__":
